@@ -11,7 +11,7 @@ set -euo pipefail
 REPO="${1:-Jaws-Platform/jaws-branding}"
 
 # Every job in .github/workflows/ci.yml.
-REQUIRED_CHECKS=(commitlint pr-title commitlint-rules)
+REQUIRED_CHECKS=(commitlint pr-title commitlint-rules assets)
 
 echo "==> Merge methods, squash commit format, auto-delete head branches ($REPO)"
 gh api -X PATCH "repos/$REPO" \
