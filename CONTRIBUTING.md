@@ -20,6 +20,24 @@ pre-commit install --hook-type commit-msg      # local commit-msg hook
 The `commit-msg` hook runs commitlint locally. It is a convenience only;
 **CI is the authoritative check**.
 
+Run the full CI suite locally before opening a pull request:
+
+```sh
+scripts/check.sh
+```
+
+## Assets
+
+Every asset in `assets/` is drawn by `scripts/render.py` from the original
+logo in `source/` and the fonts in `fonts/`; never edit an asset by hand.
+After changing the script, run `uv run scripts/render.py` and commit what it
+writes.
+
+The paths in `assets/` are **published**: every Jaws README and the
+organization profile link to them on `main`. Never move, rename or remove
+one. `scripts/check-assets.py` lists them with their sizes, and CI fails if
+one is missing or changes size.
+
 ## Commits
 
 Each commit message is a **single-line** Conventional Commit:
@@ -64,6 +82,7 @@ CI runs these jobs on every pull request, and all of them are required on
 | `commitlint` | Every commit in the range `base..head`, so rebase-merged commits are all checked |
 | `pr-title` | The title is a Conventional Commit and passes the commit header rules |
 | `commitlint-rules` | Unit tests for the local rule, and the fixture messages |
+| `assets` | Every published asset is at its path with its size (`scripts/check-assets.py`), and matches what `scripts/render.py` draws |
 
 ## Releases and versioning
 

@@ -28,8 +28,12 @@ human-facing version, with setup details, is [CONTRIBUTING.md](CONTRIBUTING.md).
   authored by `jaws-platform-release-bot[bot]`, the organization's own app. Do
   not create tags or releases by hand, and do not edit `CHANGELOG.md` or
   `version.txt`.
+- **Never move, rename or remove a file in `assets/`.** Every Jaws README
+  links to these paths on `main`. Redraw an asset at its path instead.
+- **Never edit an asset by hand.** Change `scripts/render.py`, run
+  `uv run scripts/render.py`, and commit what it writes.
 - **Run the checks before opening a pull request:**
 
   ```sh
-  npm test
+  scripts/check.sh
   ```
