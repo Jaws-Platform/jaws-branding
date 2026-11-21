@@ -107,7 +107,9 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      # setup-uv publishes no major-version tag, so it is pinned to a release;
+      # Dependabot bumps it.
+      - uses: astral-sh/setup-uv@v10.4.0
       # Every Jaws repository links to these paths on main.
       - name: Every published asset is at its path, with its size
         run: python3 scripts/check-assets.py
