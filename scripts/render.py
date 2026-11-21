@@ -74,6 +74,16 @@ def avatar(size: int = 1024, padding: float = 0.13) -> Image.Image:
     return canvas.convert("RGB")
 
 
+def font(path: Path, size: int) -> ImageFont.FreeTypeFont:
+    """A font with the basic layout engine on every platform.
+
+    Pillow uses Raqm for text layout where its build has it (Linux) and the
+    basic engine where it does not (macOS), and the two place glyphs a little
+    differently. Forcing the basic engine renders identically everywhere.
+    """
+    return ImageFont.truetype(str(path), size, layout_engine=ImageFont.Layout.BASIC)
+
+
 def tracked_text(
     draw: ImageDraw.ImageDraw,
     xy: tuple[float, float],
@@ -121,8 +131,8 @@ def banner(width: int = 1280, height: int = 320) -> Image.Image:
 
     # The wordmark, with an offset red shadow, and the tagline under a red rule.
     text_left = mark_left + mark.width + 44 * s
-    wordmark_font = ImageFont.truetype(str(WORDMARK_FONT), 150 * s)
-    tagline_font = ImageFont.truetype(str(TAGLINE_FONT), 27 * s)
+    wordmark_font = font(WORDMARK_FONT, 150 * s)
+    tagline_font = font(TAGLINE_FONT, 27 * s)
     baseline = 186 * s
     shadow = 7 * s
     tracking = 6 * s
