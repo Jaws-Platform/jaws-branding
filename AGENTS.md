@@ -24,6 +24,10 @@ human-facing version, with setup details, is [CONTRIBUTING.md](CONTRIBUTING.md).
   `chore`, `refactor`, `ci`, `build`, `perf`, `style`, `test`, `revert`.
   Breaking changes use `!` (`feat!: ...`).
 - **Merges are squash or rebase only.** History stays linear.
+- **Releases are made by merging the Release Please pull request**, which is
+  authored by `jaws-platform-release-bot[bot]`, the organization's own app. Do
+  not create tags or releases by hand, and do not edit `CHANGELOG.md` or
+  `version.txt`.
 - **Run the checks before opening a pull request:**
 
   ```sh
